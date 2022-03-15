@@ -1,4 +1,3 @@
-
 /*
  * @lc app=leetcode.cn id=3 lang=java
  *
@@ -17,17 +16,16 @@ class Solution {
         // 字典赋初始值
         Arrays.fill(dict, -1);
         int max = 0;
-        int tmp_index = 0;
+        int slide = -1;
         for (int i = 0; i < s.length(); i++) {
-            if (dict[s.charAt(i)] != -1) {
-
-                int tmp = i - dict[s.charAt(i)];
-                max = tmp > max ? tmp : max;
+            if (dict[s.charAt(i)] > slide) {
+                slide = dict[s.charAt(i)];
             }
-            slideLen++;
+            int tmp = i - slide;
+            max = Math.max(tmp, max);
+            // 标记每个字符出现的位置
             dict[s.charAt(i)] = i;
         }
-
         return max;
 
     }
